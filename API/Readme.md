@@ -169,16 +169,16 @@ Example:
 
 
 
-### 2.4 Activity
+### 2.4 Promotion
 
-The Activity means the business activities, which is under `/activity/...`
+The Promotion means the business activities, which is under `/promotion/...`
 
 ```
-GET: /activity/:id
-	return the activity's information (according to the :id)
+GET: /promotion/:id
+	return the promotion's information (according to the :id)
 
 Example:
-	curl domainname.com/api/v1/activity/1
+	curl domainname.com/api/v1/promotion/1
 	return {
 		id: 1, 
 		abstract: 'A', 
@@ -189,10 +189,10 @@ Example:
 ```
 
 ```
-GET: /activity?building=:build_id ? starttime=xxx&endtime=xxx
+GET: /promotion?building=:build_id ? starttime=xxx&endtime=xxx
 	
 Example:
-	curl domainname.com/api/v1/activity?building_id=12
+	curl domainname.com/api/v1/promotion?building_id=12
 	return [
 		{ id: 1,  abstract: 'A',  time: '2020/12/12 12:00' },
 		...
