@@ -20,3 +20,4 @@ The dashboard, containing the progress and documents.
 ## Documents
 
 * [API document](./API)
+* [Database Design]("./database")
