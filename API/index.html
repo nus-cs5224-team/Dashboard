@@ -699,20 +699,30 @@ margin-bottom: 20px;
         defs["Building"] = {
   "type" : "object",
   "properties" : {
+    "area" : {
+      "type" : "string"
+    },
+    "fax" : {
+      "type" : "string"
+    },
     "id" : {
       "type" : "integer",
       "format" : "int32"
     },
+    "imageUrl" : {
+      "type" : "string"
+    },
+    "location" : {
+      "type" : "string"
+    },
+    "locationUrl" : {
+      "type" : "string"
+    },
     "name" : {
       "type" : "string"
     },
-    "pos_x" : {
-      "type" : "number",
-      "format" : "float"
-    },
-    "pos_y" : {
-      "type" : "number",
-      "format" : "float"
+    "tel" : {
+      "type" : "string"
     }
   },
   "title" : "Building"
@@ -754,27 +764,28 @@ margin-bottom: 20px;
   },
   "title" : "Event"
 };
-        defs["Navi"] = {
+        defs["NaviS"] = {
   "type" : "object",
   "properties" : {
-    "from" : {
-      "$ref" : "#/definitions/Stop"
+    "busName" : {
+      "type" : "string"
+    },
+    "fromStopName" : {
+      "type" : "string"
+    },
+    "interval" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "priority" : {
       "type" : "integer",
       "format" : "int32"
     },
-    "timetable" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/LocalDateTime"
-      }
-    },
-    "to" : {
-      "$ref" : "#/definitions/Stop"
+    "toStopName" : {
+      "type" : "string"
     }
   },
-  "title" : "Navi"
+  "title" : "NaviS"
 };
         defs["Promotion"] = {
   "type" : "object",
@@ -817,13 +828,34 @@ margin-bottom: 20px;
     "pos_y" : {
       "type" : "number",
       "format" : "float"
+    }
+  },
+  "title" : "Stop"
+};
+        defs["StopInNavigation"] = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "pos_x" : {
+      "type" : "number",
+      "format" : "float"
+    },
+    "pos_y" : {
+      "type" : "number",
+      "format" : "float"
     },
     "priority" : {
       "type" : "integer",
       "format" : "int32"
     }
   },
-  "title" : "Stop"
+  "title" : "StopInNavigation"
 };
         defs["User"] = {
   "type" : "object",
@@ -861,27 +893,36 @@ margin-bottom: 20px;
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="BuildingAPI"><a href="#api-BuildingAPI">API Methods - BuildingAPI</a></li>
+                    <li data-group="BuildingAPI" data-name="getAllBuildingsUsingGET" class="">
+                      <a href="#api-BuildingAPI-getAllBuildingsUsingGET">getAllBuildingsUsingGET</a>
+                    </li>
+                    <li data-group="BuildingAPI" data-name="getBuildingByIdUsingGET" class="">
+                      <a href="#api-BuildingAPI-getBuildingByIdUsingGET">getBuildingByIdUsingGET</a>
+                    </li>
                     <li data-group="BuildingAPI" data-name="getBuildingNearStopsUsingGET" class="">
                       <a href="#api-BuildingAPI-getBuildingNearStopsUsingGET">getBuildingNearStopsUsingGET</a>
                     </li>
-                    <li data-group="BuildingAPI" data-name="getBuildingUsingGET" class="">
-                      <a href="#api-BuildingAPI-getBuildingUsingGET">getBuildingUsingGET</a>
-                    </li>
                   <li class="nav-header" data-group="BusAPI"><a href="#api-BusAPI">API Methods - BusAPI</a></li>
+                    <li data-group="BusAPI" data-name="getAllBusUsingGET" class="">
+                      <a href="#api-BusAPI-getAllBusUsingGET">getAllBusUsingGET</a>
+                    </li>
                     <li data-group="BusAPI" data-name="getBusUsingGET" class="">
                       <a href="#api-BusAPI-getBusUsingGET">getBusUsingGET</a>
                     </li>
                     <li data-group="BusAPI" data-name="getRouteUsingGET" class="">
                       <a href="#api-BusAPI-getRouteUsingGET">getRouteUsingGET</a>
                     </li>
-                    <li data-group="BusAPI" data-name="getTimetableUsingGET" class="">
-                      <a href="#api-BusAPI-getTimetableUsingGET">getTimetableUsingGET</a>
+                    <li data-group="BusAPI" data-name="getTimeIntervalUsingGET" class="">
+                      <a href="#api-BusAPI-getTimeIntervalUsingGET">getTimeIntervalUsingGET</a>
                     </li>
                   <li class="nav-header" data-group="NavigationAPI"><a href="#api-NavigationAPI">API Methods - NavigationAPI</a></li>
                     <li data-group="NavigationAPI" data-name="navigateUsingGET" class="">
                       <a href="#api-NavigationAPI-navigateUsingGET">navigateUsingGET</a>
                     </li>
                   <li class="nav-header" data-group="PromotionsAPI"><a href="#api-PromotionsAPI">API Methods - PromotionsAPI</a></li>
+                    <li data-group="PromotionsAPI" data-name="getAllPromotionUsingGET" class="">
+                      <a href="#api-PromotionsAPI-getAllPromotionUsingGET">getAllPromotionUsingGET</a>
+                    </li>
                     <li data-group="PromotionsAPI" data-name="getPromotionByBuildingUsingGET" class="">
                       <a href="#api-PromotionsAPI-getPromotionByBuildingUsingGET">getPromotionByBuildingUsingGET</a>
                     </li>
@@ -889,6 +930,9 @@ margin-bottom: 20px;
                       <a href="#api-PromotionsAPI-getPromotionUsingGET">getPromotionUsingGET</a>
                     </li>
                   <li class="nav-header" data-group="StopAPI"><a href="#api-StopAPI">API Methods - StopAPI</a></li>
+                    <li data-group="StopAPI" data-name="getAllStopUsingGET" class="">
+                      <a href="#api-StopAPI-getAllStopUsingGET">getAllStopUsingGET</a>
+                    </li>
                     <li data-group="StopAPI" data-name="getRunningThroughBusUsingGET" class="">
                       <a href="#api-StopAPI-getRunningThroughBusUsingGET">getRunningThroughBusUsingGET</a>
                     </li>
@@ -907,9 +951,6 @@ margin-bottom: 20px;
                     </li>
                     <li data-group="UserAPI" data-name="getUserEventsUsingGET" class="">
                       <a href="#api-UserAPI-getUserEventsUsingGET">getUserEventsUsingGET</a>
-                    </li>
-                    <li data-group="UserAPI" data-name="getUserEventsUsingGET1" class="">
-                      <a href="#api-UserAPI-getUserEventsUsingGET1">getUserEventsUsingGET1</a>
                     </li>
                     <li data-group="UserAPI" data-name="updateUsingPUT" class="">
                       <a href="#api-UserAPI-updateUsingPUT">updateUsingPUT</a>
@@ -935,11 +976,647 @@ margin-bottom: 20px;
         <div id="sections">
                 <section id="api-BuildingAPI">
                   <h1>BuildingAPI</h1>
+                    <div id="api-BuildingAPI-getAllBuildingsUsingGET">
+                      <article id="api-BuildingAPI-getAllBuildingsUsingGET-0" data-group="User" data-name="getAllBuildingsUsingGET" data-version="0">
+                        <div class="pull-left">
+                          <h1>getAllBuildingsUsingGET</h1>
+                          <p>Get all buildings</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/building</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getAllBuildingsUsingGET-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/building?name="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.BuildingAPIApi;
+
+import java.io.File;
+import java.util.*;
+
+public class BuildingAPIApiExample {
+
+    public static void main(String[] args) {
+        
+        BuildingAPIApi apiInstance = new BuildingAPIApi();
+        String name = name_example; // String | name
+        try {
+            array[Building] result = apiInstance.getAllBuildingsUsingGET(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BuildingAPIApi#getAllBuildingsUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.BuildingAPIApi;
+
+public class BuildingAPIApiExample {
+
+    public static void main(String[] args) {
+        BuildingAPIApi apiInstance = new BuildingAPIApi();
+        String name = name_example; // String | name
+        try {
+            array[Building] result = apiInstance.getAllBuildingsUsingGET(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BuildingAPIApi#getAllBuildingsUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // name (optional)
+
+BuildingAPIApi *apiInstance = [[BuildingAPIApi alloc] init];
+
+// Get all buildings
+[apiInstance getAllBuildingsUsingGETWith:name
+              completionHandler: ^(array[Building] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
+
+var api = new ApiDocumentation.BuildingAPIApi()
+
+var opts = { 
+  'name': name_example // {String} name
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getAllBuildingsUsingGET(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class getAllBuildingsUsingGETExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new BuildingAPIApi();
+            var name = name_example;  // String | name (optional) 
+
+            try
+            {
+                // Get all buildings
+                array[Building] result = apiInstance.getAllBuildingsUsingGET(name);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling BuildingAPIApi.getAllBuildingsUsingGET: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\BuildingAPIApi();
+$name = name_example; // String | name
+
+try {
+    $result = $api_instance->getAllBuildingsUsingGET($name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BuildingAPIApi->getAllBuildingsUsingGET: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::BuildingAPIApi;
+
+my $api_instance = WWW::SwaggerClient::BuildingAPIApi->new();
+my $name = name_example; # String | name
+
+eval { 
+    my $result = $api_instance->getAllBuildingsUsingGET(name => $name);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling BuildingAPIApi->getAllBuildingsUsingGET: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getAllBuildingsUsingGET-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.BuildingAPIApi()
+name = name_example # String | name (optional)
+
+try: 
+    # Get all buildings
+    api_response = api_instance.get_all_buildings_using_get(name=name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling BuildingAPIApi->getAllBuildingsUsingGET: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">name</td>
+<td>
+
+
+    <div id="d2e199_getAllBuildingsUsingGET_name">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        name
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAllBuildingsUsingGET-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAllBuildingsUsingGET-200-schema">
+                                  <div id='responses-getAllBuildingsUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Building"
+    }
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAllBuildingsUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAllBuildingsUsingGET-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAllBuildingsUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 403 - Forbidden </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 404 - Not Found </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-BuildingAPI-getBuildingByIdUsingGET">
+                      <article id="api-BuildingAPI-getBuildingByIdUsingGET-0" data-group="User" data-name="getBuildingByIdUsingGET" data-version="0">
+                        <div class="pull-left">
+                          <h1>getBuildingByIdUsingGET</h1>
+                          <p>Get a building by its id</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/building/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BuildingAPI-getBuildingByIdUsingGET-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/building/{id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.BuildingAPIApi;
+
+import java.io.File;
+import java.util.*;
+
+public class BuildingAPIApiExample {
+
+    public static void main(String[] args) {
+        
+        BuildingAPIApi apiInstance = new BuildingAPIApi();
+        Integer id = 56; // Integer | id
+        try {
+            Building result = apiInstance.getBuildingByIdUsingGET(id);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BuildingAPIApi#getBuildingByIdUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.BuildingAPIApi;
+
+public class BuildingAPIApiExample {
+
+    public static void main(String[] args) {
+        BuildingAPIApi apiInstance = new BuildingAPIApi();
+        Integer id = 56; // Integer | id
+        try {
+            Building result = apiInstance.getBuildingByIdUsingGET(id);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BuildingAPIApi#getBuildingByIdUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // id
+
+BuildingAPIApi *apiInstance = [[BuildingAPIApi alloc] init];
+
+// Get a building by its id
+[apiInstance getBuildingByIdUsingGETWith:id
+              completionHandler: ^(Building output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
+
+var api = new ApiDocumentation.BuildingAPIApi()
+
+var id = 56; // {Integer} id
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getBuildingByIdUsingGET(id, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class getBuildingByIdUsingGETExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new BuildingAPIApi();
+            var id = 56;  // Integer | id
+
+            try
+            {
+                // Get a building by its id
+                Building result = apiInstance.getBuildingByIdUsingGET(id);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling BuildingAPIApi.getBuildingByIdUsingGET: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\BuildingAPIApi();
+$id = 56; // Integer | id
+
+try {
+    $result = $api_instance->getBuildingByIdUsingGET($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BuildingAPIApi->getBuildingByIdUsingGET: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::BuildingAPIApi;
+
+my $api_instance = WWW::SwaggerClient::BuildingAPIApi->new();
+my $id = 56; # Integer | id
+
+eval { 
+    my $result = $api_instance->getBuildingByIdUsingGET(id => $id);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling BuildingAPIApi->getBuildingByIdUsingGET: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingByIdUsingGET-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.BuildingAPIApi()
+id = 56 # Integer | id
+
+try: 
+    # Get a building by its id
+    api_response = api_instance.get_building_by_id_using_get(id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling BuildingAPIApi->getBuildingByIdUsingGET: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_getBuildingByIdUsingGET_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+                    <span class="format">
+                        (int32)
+                    </span>
+
+                    <div class="inner description">
+                        id
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getBuildingByIdUsingGET-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getBuildingByIdUsingGET-200-schema">
+                                  <div id='responses-getBuildingByIdUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/Building"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getBuildingByIdUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getBuildingByIdUsingGET-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getBuildingByIdUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 403 - Forbidden </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 404 - Not Found </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-BuildingAPI-getBuildingNearStopsUsingGET">
                       <article id="api-BuildingAPI-getBuildingNearStopsUsingGET-0" data-group="User" data-name="getBuildingNearStopsUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>getBuildingNearStopsUsingGET</h1>
-                          <p>Find near bus stops</p>
+                          <p>Find near bus stops, maybe multiple bus stops with priority</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -967,7 +1644,7 @@ margin-bottom: 20px;
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-BuildingAPI-getBuildingNearStopsUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/building/{id}/stops"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/building/{id}/stops"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-BuildingAPI-getBuildingNearStopsUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -985,7 +1662,7 @@ public class BuildingAPIApiExample {
         BuildingAPIApi apiInstance = new BuildingAPIApi();
         Integer id = 56; // Integer | id
         try {
-            array[Stop] result = apiInstance.getBuildingNearStopsUsingGET(id);
+            array[StopInNavigation] result = apiInstance.getBuildingNearStopsUsingGET(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BuildingAPIApi#getBuildingNearStopsUsingGET");
@@ -1004,7 +1681,7 @@ public class BuildingAPIApiExample {
         BuildingAPIApi apiInstance = new BuildingAPIApi();
         Integer id = 56; // Integer | id
         try {
-            array[Stop] result = apiInstance.getBuildingNearStopsUsingGET(id);
+            array[StopInNavigation] result = apiInstance.getBuildingNearStopsUsingGET(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BuildingAPIApi#getBuildingNearStopsUsingGET");
@@ -1022,9 +1699,9 @@ public class BuildingAPIApiExample {
 
 BuildingAPIApi *apiInstance = [[BuildingAPIApi alloc] init];
 
-// Find near bus stops
+// Find near bus stops, maybe multiple bus stops with priority
 [apiInstance getBuildingNearStopsUsingGETWith:id
-              completionHandler: ^(array[Stop] output, NSError* error) {
+              completionHandler: ^(array[StopInNavigation] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1076,8 +1753,8 @@ namespace Example
 
             try
             {
-                // Find near bus stops
-                array[Stop] result = apiInstance.getBuildingNearStopsUsingGET(id);
+                // Find near bus stops, maybe multiple bus stops with priority
+                array[StopInNavigation] result = apiInstance.getBuildingNearStopsUsingGET(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1135,7 +1812,7 @@ api_instance = swagger_client.BuildingAPIApi()
 id = 56 # Integer | id
 
 try: 
-    # Find near bus stops
+    # Find near bus stops, maybe multiple bus stops with priority
     api_response = api_instance.get_building_near_stops_using_get(id)
     pprint(api_response)
 except ApiException as e:
@@ -1203,7 +1880,7 @@ except ApiException as e:
   "schema" : {
     "type" : "array",
     "items" : {
-      "$ref" : "#/definitions/Stop"
+      "$ref" : "#/definitions/StopInNavigation"
     }
   }
 };
@@ -1257,11 +1934,14 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                    <div id="api-BuildingAPI-getBuildingUsingGET">
-                      <article id="api-BuildingAPI-getBuildingUsingGET-0" data-group="User" data-name="getBuildingUsingGET" data-version="0">
+                  </section>
+                <section id="api-BusAPI">
+                  <h1>BusAPI</h1>
+                    <div id="api-BusAPI-getAllBusUsingGET">
+                      <article id="api-BusAPI-getAllBusUsingGET-0" data-group="User" data-name="getAllBusUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>getBuildingUsingGET</h1>
-                          <p>Get a building by ID</p>
+                          <h1>getAllBusUsingGET</h1>
+                          <p>Get all buses</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1269,84 +1949,81 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/building/{id}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/bus</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-BuildingAPI-getBuildingUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-BuildingAPI-getBuildingUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-BusAPI-getAllBusUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BusAPI-getAllBusUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-BuildingAPI-getBuildingUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/building/{id}"</code></pre>
+                          <div class="tab-pane active" id="examples-BusAPI-getAllBusUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/bus"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-java">
+                          <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.BuildingAPIApi;
+import io.swagger.client.api.BusAPIApi;
 
 import java.io.File;
 import java.util.*;
 
-public class BuildingAPIApiExample {
+public class BusAPIApiExample {
 
     public static void main(String[] args) {
         
-        BuildingAPIApi apiInstance = new BuildingAPIApi();
-        Integer id = 56; // Integer | id
+        BusAPIApi apiInstance = new BusAPIApi();
         try {
-            Building result = apiInstance.getBuildingUsingGET(id);
+            array[Bus] result = apiInstance.getAllBusUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BuildingAPIApi#getBuildingUsingGET");
+            System.err.println("Exception when calling BusAPIApi#getAllBusUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.BuildingAPIApi;
+                          <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.BusAPIApi;
 
-public class BuildingAPIApiExample {
+public class BusAPIApiExample {
 
     public static void main(String[] args) {
-        BuildingAPIApi apiInstance = new BuildingAPIApi();
-        Integer id = 56; // Integer | id
+        BusAPIApi apiInstance = new BusAPIApi();
         try {
-            Building result = apiInstance.getBuildingUsingGET(id);
+            array[Bus] result = apiInstance.getAllBusUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BuildingAPIApi#getBuildingUsingGET");
+            System.err.println("Exception when calling BusAPIApi#getAllBusUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // id
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+BusAPIApi *apiInstance = [[BusAPIApi alloc] init];
 
-BuildingAPIApi *apiInstance = [[BuildingAPIApi alloc] init];
-
-// Get a building by ID
-[apiInstance getBuildingUsingGETWith:id
-              completionHandler: ^(Building output, NSError* error) {
+// Get all buses
+[apiInstance getAllBusUsingGETWithCompletionHandler: 
+              ^(array[Bus] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1357,13 +2034,10 @@ BuildingAPIApi *apiInstance = [[BuildingAPIApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
 
-var api = new ApiDocumentation.BuildingAPIApi()
-
-var id = 56; // {Integer} id
-
+var api = new ApiDocumentation.BusAPIApi()
 
 var callback = function(error, data, response) {
   if (error) {
@@ -1372,14 +2046,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getBuildingUsingGET(id, callback);
+api.getAllBusUsingGET(callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1388,23 +2062,22 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class getBuildingUsingGETExample
+    public class getAllBusUsingGETExample
     {
         public void main()
         {
             
-            var apiInstance = new BuildingAPIApi();
-            var id = 56;  // Integer | id
+            var apiInstance = new BusAPIApi();
 
             try
             {
-                // Get a building by ID
-                Building result = apiInstance.getBuildingUsingGET(id);
+                // Get all buses
+                array[Bus] result = apiInstance.getAllBusUsingGET();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling BuildingAPIApi.getBuildingUsingGET: " + e.Message );
+                Debug.Print("Exception when calling BusAPIApi.getAllBusUsingGET: " + e.Message );
             }
         }
     }
@@ -1412,40 +2085,38 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-php">
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\Api\BuildingAPIApi();
-$id = 56; // Integer | id
+$api_instance = new Swagger\Client\Api\BusAPIApi();
 
 try {
-    $result = $api_instance->getBuildingUsingGET($id);
+    $result = $api_instance->getAllBusUsingGET();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling BuildingAPIApi->getBuildingUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling BusAPIApi->getAllBusUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::BuildingAPIApi;
+use WWW::SwaggerClient::BusAPIApi;
 
-my $api_instance = WWW::SwaggerClient::BuildingAPIApi->new();
-my $id = 56; # Integer | id
+my $api_instance = WWW::SwaggerClient::BusAPIApi->new();
 
 eval { 
-    my $result = $api_instance->getBuildingUsingGET(id => $id);
+    my $result = $api_instance->getAllBusUsingGET();
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling BuildingAPIApi->getBuildingUsingGET: $@\n";
+    warn "Exception when calling BusAPIApi->getAllBusUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BuildingAPI-getBuildingUsingGET-0-python">
+                            <div class="tab-pane" id="examples-BusAPI-getAllBusUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1453,53 +2124,19 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.BuildingAPIApi()
-id = 56 # Integer | id
+api_instance = swagger_client.BusAPIApi()
 
 try: 
-    # Get a building by ID
-    api_response = api_instance.get_building_using_get(id)
+    # Get all buses
+    api_response = api_instance.get_all_bus_using_get()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling BuildingAPIApi->getBuildingUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling BusAPIApi->getAllBusUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
                           <h2>Parameters</h2>
 
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">id*</td>
-<td>
-
-
-    <div id="d2e199_getBuildingUsingGET_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
-                    <div class="inner description">
-                        id
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
 
 
 
@@ -1510,20 +2147,23 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-getBuildingUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-getAllBusUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getBuildingUsingGET-200-schema">
-                                  <div id='responses-getBuildingUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-getAllBusUsingGET-200-schema">
+                                  <div id='responses-getAllBusUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "schema" : {
-    "$ref" : "#/definitions/Building"
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Bus"
+    }
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -1538,14 +2178,14 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getBuildingUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getBuildingUsingGET-200-schema-200');
+                                        $('#responses-getAllBusUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAllBusUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-getBuildingUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-getAllBusUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -1576,14 +2216,11 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                  </section>
-                <section id="api-BusAPI">
-                  <h1>BusAPI</h1>
                     <div id="api-BusAPI-getBusUsingGET">
                       <article id="api-BusAPI-getBusUsingGET-0" data-group="User" data-name="getBusUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>getBusUsingGET</h1>
-                          <p>Get a bus</p>
+                          <p>Get a bus by name</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1611,7 +2248,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-BusAPI-getBusUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/bus/{busName}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/bus/{busName}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-BusAPI-getBusUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1666,7 +2303,7 @@ public class BusAPIApiExample {
 
 BusAPIApi *apiInstance = [[BusAPIApi alloc] init];
 
-// Get a bus
+// Get a bus by name
 [apiInstance getBusUsingGETWith:busName
               completionHandler: ^(Bus output, NSError* error) {
                             if (output) {
@@ -1720,7 +2357,7 @@ namespace Example
 
             try
             {
-                // Get a bus
+                // Get a bus by name
                 Bus result = apiInstance.getBusUsingGET(busName);
                 Debug.WriteLine(result);
             }
@@ -1779,7 +2416,7 @@ api_instance = swagger_client.BusAPIApi()
 busName = busName_example # String | busName
 
 try: 
-    # Get a bus
+    # Get a bus by name
     api_response = api_instance.get_bus_using_get(busName)
     pprint(api_response)
 except ApiException as e:
@@ -1899,7 +2536,7 @@ except ApiException as e:
                       <article id="api-BusAPI-getRouteUsingGET-0" data-group="User" data-name="getRouteUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>getRouteUsingGET</h1>
-                          <p>Get a bus&#39;s route</p>
+                          <p>Get a bus&#39;s route by bus name</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1927,7 +2564,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-BusAPI-getRouteUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/bus/{busName}/route"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/bus/{busName}/route"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-BusAPI-getRouteUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1982,7 +2619,7 @@ public class BusAPIApiExample {
 
 BusAPIApi *apiInstance = [[BusAPIApi alloc] init];
 
-// Get a bus's route
+// Get a bus's route by bus name
 [apiInstance getRouteUsingGETWith:busName
               completionHandler: ^(array[Stop] output, NSError* error) {
                             if (output) {
@@ -2036,7 +2673,7 @@ namespace Example
 
             try
             {
-                // Get a bus's route
+                // Get a bus's route by bus name
                 array[Stop] result = apiInstance.getRouteUsingGET(busName);
                 Debug.WriteLine(result);
             }
@@ -2095,7 +2732,7 @@ api_instance = swagger_client.BusAPIApi()
 busName = busName_example # String | busName
 
 try: 
-    # Get a bus's route
+    # Get a bus's route by bus name
     api_response = api_instance.get_route_using_get(busName)
     pprint(api_response)
 except ApiException as e:
@@ -2214,11 +2851,11 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                    <div id="api-BusAPI-getTimetableUsingGET">
-                      <article id="api-BusAPI-getTimetableUsingGET-0" data-group="User" data-name="getTimetableUsingGET" data-version="0">
+                    <div id="api-BusAPI-getTimeIntervalUsingGET">
+                      <article id="api-BusAPI-getTimeIntervalUsingGET-0" data-group="User" data-name="getTimeIntervalUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>getTimetableUsingGET</h1>
-                          <p>Get a bus&#39;s timetable</p>
+                          <h1>getTimeIntervalUsingGET</h1>
+                          <p>Get time interval between 2 buses by bus name</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2226,29 +2863,29 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/bus/{busName}/timetable</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/bus/{busName}/interval</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-BusAPI-getTimetableUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-BusAPI-getTimetableUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-BusAPI-getTimeIntervalUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-BusAPI-getTimetableUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/bus/{busName}/timetable"</code></pre>
+                          <div class="tab-pane active" id="examples-BusAPI-getTimeIntervalUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/bus/{busName}/interval"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-java">
+                          <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -2264,17 +2901,17 @@ public class BusAPIApiExample {
         BusAPIApi apiInstance = new BusAPIApi();
         String busName = busName_example; // String | busName
         try {
-            array[LocalDateTime] result = apiInstance.getTimetableUsingGET(busName);
+            'Integer' result = apiInstance.getTimeIntervalUsingGET(busName);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BusAPIApi#getTimetableUsingGET");
+            System.err.println("Exception when calling BusAPIApi#getTimeIntervalUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-android">
+                          <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.BusAPIApi;
 
 public class BusAPIApiExample {
@@ -2283,27 +2920,27 @@ public class BusAPIApiExample {
         BusAPIApi apiInstance = new BusAPIApi();
         String busName = busName_example; // String | busName
         try {
-            array[LocalDateTime] result = apiInstance.getTimetableUsingGET(busName);
+            'Integer' result = apiInstance.getTimeIntervalUsingGET(busName);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BusAPIApi#getTimetableUsingGET");
+            System.err.println("Exception when calling BusAPIApi#getTimeIntervalUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">String *busName = busName_example; // busName
 
 BusAPIApi *apiInstance = [[BusAPIApi alloc] init];
 
-// Get a bus's timetable
-[apiInstance getTimetableUsingGETWith:busName
-              completionHandler: ^(array[LocalDateTime] output, NSError* error) {
+// Get time interval between 2 buses by bus name
+[apiInstance getTimeIntervalUsingGETWith:busName
+              completionHandler: ^('Integer' output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2314,7 +2951,7 @@ BusAPIApi *apiInstance = [[BusAPIApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
 
 var api = new ApiDocumentation.BusAPIApi()
@@ -2329,14 +2966,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getTimetableUsingGET(busName, callback);
+api.getTimeIntervalUsingGET(busName, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -2345,7 +2982,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class getTimetableUsingGETExample
+    public class getTimeIntervalUsingGETExample
     {
         public void main()
         {
@@ -2355,13 +2992,13 @@ namespace Example
 
             try
             {
-                // Get a bus's timetable
-                array[LocalDateTime] result = apiInstance.getTimetableUsingGET(busName);
+                // Get time interval between 2 buses by bus name
+                'Integer' result = apiInstance.getTimeIntervalUsingGET(busName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling BusAPIApi.getTimetableUsingGET: " + e.Message );
+                Debug.Print("Exception when calling BusAPIApi.getTimeIntervalUsingGET: " + e.Message );
             }
         }
     }
@@ -2369,7 +3006,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-php">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -2377,15 +3014,15 @@ $api_instance = new Swagger\Client\Api\BusAPIApi();
 $busName = busName_example; // String | busName
 
 try {
-    $result = $api_instance->getTimetableUsingGET($busName);
+    $result = $api_instance->getTimeIntervalUsingGET($busName);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling BusAPIApi->getTimetableUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling BusAPIApi->getTimeIntervalUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::BusAPIApi;
@@ -2394,15 +3031,15 @@ my $api_instance = WWW::SwaggerClient::BusAPIApi->new();
 my $busName = busName_example; # String | busName
 
 eval { 
-    my $result = $api_instance->getTimetableUsingGET(busName => $busName);
+    my $result = $api_instance->getTimeIntervalUsingGET(busName => $busName);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling BusAPIApi->getTimetableUsingGET: $@\n";
+    warn "Exception when calling BusAPIApi->getTimeIntervalUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-BusAPI-getTimetableUsingGET-0-python">
+                            <div class="tab-pane" id="examples-BusAPI-getTimeIntervalUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -2414,11 +3051,11 @@ api_instance = swagger_client.BusAPIApi()
 busName = busName_example # String | busName
 
 try: 
-    # Get a bus's timetable
-    api_response = api_instance.get_timetable_using_get(busName)
+    # Get time interval between 2 buses by bus name
+    api_response = api_instance.get_time_interval_using_get(busName)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling BusAPIApi->getTimetableUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling BusAPIApi->getTimeIntervalUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2434,7 +3071,7 @@ except ApiException as e:
 <td>
 
 
-    <div id="d2e199_getTimetableUsingGET_busName">
+    <div id="d2e199_getTimeIntervalUsingGET_busName">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -2464,23 +3101,21 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-getTimetableUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-getTimeIntervalUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getTimetableUsingGET-200-schema">
-                                  <div id='responses-getTimetableUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-getTimeIntervalUsingGET-200-schema">
+                                  <div id='responses-getTimeIntervalUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/LocalDateTime"
-    }
+    "type" : "integer",
+    "format" : "int32"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -2495,14 +3130,14 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getTimetableUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getTimetableUsingGET-200-schema-200');
+                                        $('#responses-getTimeIntervalUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getTimeIntervalUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-getTimetableUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-getTimeIntervalUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -2540,7 +3175,7 @@ except ApiException as e:
                       <article id="api-NavigationAPI-navigateUsingGET-0" data-group="User" data-name="navigateUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>navigateUsingGET</h1>
-                          <p>Get navigation information</p>
+                          <p>Get navigation information, need :from and :to as query parameters.</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2568,7 +3203,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-NavigationAPI-navigateUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/navigation?from=&to="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/navigation?from=&to="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-NavigationAPI-navigateUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2584,10 +3219,10 @@ public class NavigationAPIApiExample {
     public static void main(String[] args) {
         
         NavigationAPIApi apiInstance = new NavigationAPIApi();
-        String from = from_example; // String | from
-        String to = to_example; // String | to
+        Integer from = 56; // Integer | from
+        Integer to = 56; // Integer | to
         try {
-            array[Navi] result = apiInstance.navigateUsingGET(from, to);
+            array[NaviS] result = apiInstance.navigateUsingGET(from, to);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling NavigationAPIApi#navigateUsingGET");
@@ -2604,10 +3239,10 @@ public class NavigationAPIApiExample {
 
     public static void main(String[] args) {
         NavigationAPIApi apiInstance = new NavigationAPIApi();
-        String from = from_example; // String | from
-        String to = to_example; // String | to
+        Integer from = 56; // Integer | from
+        Integer to = 56; // Integer | to
         try {
-            array[Navi] result = apiInstance.navigateUsingGET(from, to);
+            array[NaviS] result = apiInstance.navigateUsingGET(from, to);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling NavigationAPIApi#navigateUsingGET");
@@ -2621,15 +3256,15 @@ public class NavigationAPIApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-NavigationAPI-navigateUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *from = from_example; // from
-String *to = to_example; // to
+                              <pre class="prettyprint"><code class="language-cpp">Integer *from = 56; // from
+Integer *to = 56; // to
 
 NavigationAPIApi *apiInstance = [[NavigationAPIApi alloc] init];
 
-// Get navigation information
+// Get navigation information, need :from and :to as query parameters.
 [apiInstance navigateUsingGETWith:from
     to:to
-              completionHandler: ^(array[Navi] output, NSError* error) {
+              completionHandler: ^(array[NaviS] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2645,9 +3280,9 @@ NavigationAPIApi *apiInstance = [[NavigationAPIApi alloc] init];
 
 var api = new ApiDocumentation.NavigationAPIApi()
 
-var from = from_example; // {String} from
+var from = 56; // {Integer} from
 
-var to = to_example; // {String} to
+var to = 56; // {Integer} to
 
 
 var callback = function(error, data, response) {
@@ -2679,13 +3314,13 @@ namespace Example
         {
             
             var apiInstance = new NavigationAPIApi();
-            var from = from_example;  // String | from
-            var to = to_example;  // String | to
+            var from = 56;  // Integer | from
+            var to = 56;  // Integer | to
 
             try
             {
-                // Get navigation information
-                array[Navi] result = apiInstance.navigateUsingGET(from, to);
+                // Get navigation information, need :from and :to as query parameters.
+                array[NaviS] result = apiInstance.navigateUsingGET(from, to);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2703,8 +3338,8 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\NavigationAPIApi();
-$from = from_example; // String | from
-$to = to_example; // String | to
+$from = 56; // Integer | from
+$to = 56; // Integer | to
 
 try {
     $result = $api_instance->navigateUsingGET($from, $to);
@@ -2721,8 +3356,8 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::NavigationAPIApi;
 
 my $api_instance = WWW::SwaggerClient::NavigationAPIApi->new();
-my $from = from_example; # String | from
-my $to = to_example; # String | to
+my $from = 56; # Integer | from
+my $to = 56; # Integer | to
 
 eval { 
     my $result = $api_instance->navigateUsingGET(from => $from, to => $to);
@@ -2742,11 +3377,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.NavigationAPIApi()
-from = from_example # String | from
-to = to_example # String | to
+from = 56 # Integer | from
+to = 56 # Integer | to
 
 try: 
-    # Get navigation information
+    # Get navigation information, need :from and :to as query parameters.
     api_response = api_instance.navigate_using_get(from, to)
     pprint(api_response)
 except ApiException as e:
@@ -2774,8 +3409,11 @@ except ApiException as e:
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Integer
                 </span>
+                    <span class="format">
+                        (int32)
+                    </span>
 
                     <div class="inner description">
                         from
@@ -2797,8 +3435,11 @@ except ApiException as e:
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Integer
                 </span>
+                    <span class="format">
+                        (int32)
+                    </span>
 
                     <div class="inner description">
                         to
@@ -2834,7 +3475,7 @@ except ApiException as e:
   "schema" : {
     "type" : "array",
     "items" : {
-      "$ref" : "#/definitions/Navi"
+      "$ref" : "#/definitions/NaviS"
     }
   }
 };
@@ -2891,6 +3532,285 @@ except ApiException as e:
                   </section>
                 <section id="api-PromotionsAPI">
                   <h1>PromotionsAPI</h1>
+                    <div id="api-PromotionsAPI-getAllPromotionUsingGET">
+                      <article id="api-PromotionsAPI-getAllPromotionUsingGET-0" data-group="User" data-name="getAllPromotionUsingGET" data-version="0">
+                        <div class="pull-left">
+                          <h1>getAllPromotionUsingGET</h1>
+                          <p>Get a promotion by ID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/promotion</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-PromotionsAPI-getAllPromotionUsingGET-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/promotion"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PromotionsAPIApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PromotionsAPIApiExample {
+
+    public static void main(String[] args) {
+        
+        PromotionsAPIApi apiInstance = new PromotionsAPIApi();
+        try {
+            array[Promotion] result = apiInstance.getAllPromotionUsingGET();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PromotionsAPIApi#getAllPromotionUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PromotionsAPIApi;
+
+public class PromotionsAPIApiExample {
+
+    public static void main(String[] args) {
+        PromotionsAPIApi apiInstance = new PromotionsAPIApi();
+        try {
+            array[Promotion] result = apiInstance.getAllPromotionUsingGET();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PromotionsAPIApi#getAllPromotionUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+PromotionsAPIApi *apiInstance = [[PromotionsAPIApi alloc] init];
+
+// Get a promotion by ID
+[apiInstance getAllPromotionUsingGETWithCompletionHandler: 
+              ^(array[Promotion] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
+
+var api = new ApiDocumentation.PromotionsAPIApi()
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getAllPromotionUsingGET(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class getAllPromotionUsingGETExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new PromotionsAPIApi();
+
+            try
+            {
+                // Get a promotion by ID
+                array[Promotion] result = apiInstance.getAllPromotionUsingGET();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PromotionsAPIApi.getAllPromotionUsingGET: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\PromotionsAPIApi();
+
+try {
+    $result = $api_instance->getAllPromotionUsingGET();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PromotionsAPIApi->getAllPromotionUsingGET: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PromotionsAPIApi;
+
+my $api_instance = WWW::SwaggerClient::PromotionsAPIApi->new();
+
+eval { 
+    my $result = $api_instance->getAllPromotionUsingGET();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PromotionsAPIApi->getAllPromotionUsingGET: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-PromotionsAPI-getAllPromotionUsingGET-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.PromotionsAPIApi()
+
+try: 
+    # Get a promotion by ID
+    api_response = api_instance.get_all_promotion_using_get()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PromotionsAPIApi->getAllPromotionUsingGET: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAllPromotionUsingGET-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAllPromotionUsingGET-200-schema">
+                                  <div id='responses-getAllPromotionUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Promotion"
+    }
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAllPromotionUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAllPromotionUsingGET-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAllPromotionUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 403 - Forbidden </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 404 - Not Found </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-PromotionsAPI-getPromotionByBuildingUsingGET">
                       <article id="api-PromotionsAPI-getPromotionByBuildingUsingGET-0" data-group="User" data-name="getPromotionByBuildingUsingGET" data-version="0">
                         <div class="pull-left">
@@ -2923,7 +3843,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PromotionsAPI-getPromotionByBuildingUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/promotion/building/{building_id}?endtime=&starttime="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/promotion/building/{building_id}?endtime=&starttime="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PromotionsAPI-getPromotionByBuildingUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3318,7 +4238,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PromotionsAPI-getPromotionUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/promotion/{id}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/promotion/{id}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PromotionsAPI-getPromotionUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3608,11 +4528,11 @@ except ApiException as e:
                   </section>
                 <section id="api-StopAPI">
                   <h1>StopAPI</h1>
-                    <div id="api-StopAPI-getRunningThroughBusUsingGET">
-                      <article id="api-StopAPI-getRunningThroughBusUsingGET-0" data-group="User" data-name="getRunningThroughBusUsingGET" data-version="0">
+                    <div id="api-StopAPI-getAllStopUsingGET">
+                      <article id="api-StopAPI-getAllStopUsingGET-0" data-group="User" data-name="getAllStopUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>getRunningThroughBusUsingGET</h1>
-                          <p>Get running through buses</p>
+                          <h1>getAllStopUsingGET</h1>
+                          <p>Get all stops</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -3620,7 +4540,324 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/stop/{id}/bus</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/stop</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-StopAPI-getAllStopUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-StopAPI-getAllStopUsingGET-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-StopAPI-getAllStopUsingGET-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/stop?name="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.StopAPIApi;
+
+import java.io.File;
+import java.util.*;
+
+public class StopAPIApiExample {
+
+    public static void main(String[] args) {
+        
+        StopAPIApi apiInstance = new StopAPIApi();
+        String name = name_example; // String | name
+        try {
+            array[Stop] result = apiInstance.getAllStopUsingGET(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling StopAPIApi#getAllStopUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.StopAPIApi;
+
+public class StopAPIApiExample {
+
+    public static void main(String[] args) {
+        StopAPIApi apiInstance = new StopAPIApi();
+        String name = name_example; // String | name
+        try {
+            array[Stop] result = apiInstance.getAllStopUsingGET(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling StopAPIApi#getAllStopUsingGET");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // name (optional)
+
+StopAPIApi *apiInstance = [[StopAPIApi alloc] init];
+
+// Get all stops
+[apiInstance getAllStopUsingGETWith:name
+              completionHandler: ^(array[Stop] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
+
+var api = new ApiDocumentation.StopAPIApi()
+
+var opts = { 
+  'name': name_example // {String} name
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getAllStopUsingGET(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class getAllStopUsingGETExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new StopAPIApi();
+            var name = name_example;  // String | name (optional) 
+
+            try
+            {
+                // Get all stops
+                array[Stop] result = apiInstance.getAllStopUsingGET(name);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling StopAPIApi.getAllStopUsingGET: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\StopAPIApi();
+$name = name_example; // String | name
+
+try {
+    $result = $api_instance->getAllStopUsingGET($name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StopAPIApi->getAllStopUsingGET: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::StopAPIApi;
+
+my $api_instance = WWW::SwaggerClient::StopAPIApi->new();
+my $name = name_example; # String | name
+
+eval { 
+    my $result = $api_instance->getAllStopUsingGET(name => $name);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling StopAPIApi->getAllStopUsingGET: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-StopAPI-getAllStopUsingGET-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.StopAPIApi()
+name = name_example # String | name (optional)
+
+try: 
+    # Get all stops
+    api_response = api_instance.get_all_stop_using_get(name=name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling StopAPIApi->getAllStopUsingGET: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">name</td>
+<td>
+
+
+    <div id="d2e199_getAllStopUsingGET_name">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        name
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAllStopUsingGET-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAllStopUsingGET-200-schema">
+                                  <div id='responses-getAllStopUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Stop"
+    }
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAllStopUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAllStopUsingGET-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAllStopUsingGET-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 403 - Forbidden </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 404 - Not Found </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-StopAPI-getRunningThroughBusUsingGET">
+                      <article id="api-StopAPI-getRunningThroughBusUsingGET-0" data-group="User" data-name="getRunningThroughBusUsingGET" data-version="0">
+                        <div class="pull-left">
+                          <h1>getRunningThroughBusUsingGET</h1>
+                          <p>Get all buses running through the stop.</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/stop/{name}/bus</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -3640,7 +4877,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-StopAPI-getRunningThroughBusUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/stop/{id}/bus?id=&name=&pos_x=&pos_y=&priority="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/stop/{name}/bus?name="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-StopAPI-getRunningThroughBusUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3656,13 +4893,9 @@ public class StopAPIApiExample {
     public static void main(String[] args) {
         
         StopAPIApi apiInstance = new StopAPIApi();
-        Integer id = 56; // Integer | 
-        String name = name_example; // String | 
-        Float posX = 3.4; // Float | 
-        Float posY = 3.4; // Float | 
-        Integer priority = 56; // Integer | 
+        String name = name_example; // String | name
         try {
-            array[Bus] result = apiInstance.getRunningThroughBusUsingGET(id, name, posX, posY, priority);
+            array[Bus] result = apiInstance.getRunningThroughBusUsingGET(name);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling StopAPIApi#getRunningThroughBusUsingGET");
@@ -3679,13 +4912,9 @@ public class StopAPIApiExample {
 
     public static void main(String[] args) {
         StopAPIApi apiInstance = new StopAPIApi();
-        Integer id = 56; // Integer | 
-        String name = name_example; // String | 
-        Float posX = 3.4; // Float | 
-        Float posY = 3.4; // Float | 
-        Integer priority = 56; // Integer | 
+        String name = name_example; // String | name
         try {
-            array[Bus] result = apiInstance.getRunningThroughBusUsingGET(id, name, posX, posY, priority);
+            array[Bus] result = apiInstance.getRunningThroughBusUsingGET(name);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling StopAPIApi#getRunningThroughBusUsingGET");
@@ -3699,20 +4928,12 @@ public class StopAPIApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-StopAPI-getRunningThroughBusUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; //  (optional)
-String *name = name_example; //  (optional)
-Float *posX = 3.4; //  (optional)
-Float *posY = 3.4; //  (optional)
-Integer *priority = 56; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // name (optional)
 
 StopAPIApi *apiInstance = [[StopAPIApi alloc] init];
 
-// Get running through buses
-[apiInstance getRunningThroughBusUsingGETWith:id
-    name:name
-    posX:posX
-    posY:posY
-    priority:priority
+// Get all buses running through the stop.
+[apiInstance getRunningThroughBusUsingGETWith:name
               completionHandler: ^(array[Bus] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -3730,11 +4951,7 @@ StopAPIApi *apiInstance = [[StopAPIApi alloc] init];
 var api = new ApiDocumentation.StopAPIApi()
 
 var opts = { 
-  'id': 56, // {Integer} 
-  'name': name_example, // {String} 
-  'posX': 3.4, // {Float} 
-  'posY': 3.4, // {Float} 
-  'priority': 56 // {Integer} 
+  'name': name_example // {String} name
 };
 
 var callback = function(error, data, response) {
@@ -3766,16 +4983,12 @@ namespace Example
         {
             
             var apiInstance = new StopAPIApi();
-            var id = 56;  // Integer |  (optional) 
-            var name = name_example;  // String |  (optional) 
-            var posX = 3.4;  // Float |  (optional) 
-            var posY = 3.4;  // Float |  (optional) 
-            var priority = 56;  // Integer |  (optional) 
+            var name = name_example;  // String | name (optional) 
 
             try
             {
-                // Get running through buses
-                array[Bus] result = apiInstance.getRunningThroughBusUsingGET(id, name, posX, posY, priority);
+                // Get all buses running through the stop.
+                array[Bus] result = apiInstance.getRunningThroughBusUsingGET(name);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3793,14 +5006,10 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\StopAPIApi();
-$id = 56; // Integer | 
-$name = name_example; // String | 
-$posX = 3.4; // Float | 
-$posY = 3.4; // Float | 
-$priority = 56; // Integer | 
+$name = name_example; // String | name
 
 try {
-    $result = $api_instance->getRunningThroughBusUsingGET($id, $name, $posX, $posY, $priority);
+    $result = $api_instance->getRunningThroughBusUsingGET($name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StopAPIApi->getRunningThroughBusUsingGET: ', $e->getMessage(), PHP_EOL;
@@ -3814,14 +5023,10 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::StopAPIApi;
 
 my $api_instance = WWW::SwaggerClient::StopAPIApi->new();
-my $id = 56; # Integer | 
-my $name = name_example; # String | 
-my $posX = 3.4; # Float | 
-my $posY = 3.4; # Float | 
-my $priority = 56; # Integer | 
+my $name = name_example; # String | name
 
 eval { 
-    my $result = $api_instance->getRunningThroughBusUsingGET(id => $id, name => $name, posX => $posX, posY => $posY, priority => $priority);
+    my $result = $api_instance->getRunningThroughBusUsingGET(name => $name);
     print Dumper($result);
 };
 if ($@) {
@@ -3838,15 +5043,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.StopAPIApi()
-id = 56 # Integer |  (optional)
-name = name_example # String |  (optional)
-posX = 3.4 # Float |  (optional)
-posY = 3.4 # Float |  (optional)
-priority = 56 # Integer |  (optional)
+name = name_example # String | name (optional)
 
 try: 
-    # Get running through buses
-    api_response = api_instance.get_running_through_bus_using_get(id=id, name=name, posX=posX, posY=posY, priority=priority)
+    # Get all buses running through the stop.
+    api_response = api_instance.get_running_through_bus_using_get(name=name)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling StopAPIApi->getRunningThroughBusUsingGET: %s\n" % e)</code></pre>
@@ -3865,26 +5066,6 @@ except ApiException as e:
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">id</td>
-<td>
-
-
-    <div id="d2e199_getRunningThroughBusUsingGET_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
                                 <tr><td style="width:150px;">name</td>
 <td>
 
@@ -3896,66 +5077,9 @@ except ApiException as e:
                     String
                 </span>
 
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">pos_x</td>
-<td>
-
-
-    <div id="d2e199_getRunningThroughBusUsingGET_posX">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Float
-                </span>
-                    <span class="format">
-                        (float)
-                    </span>
-
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">pos_y</td>
-<td>
-
-
-    <div id="d2e199_getRunningThroughBusUsingGET_posY">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Float
-                </span>
-                    <span class="format">
-                        (float)
-                    </span>
-
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">priority</td>
-<td>
-
-
-    <div id="d2e199_getRunningThroughBusUsingGET_priority">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
+                    <div class="inner description">
+                        name
+                    </div>
             </div>
         </div>
     </div>
@@ -4042,7 +5166,7 @@ except ApiException as e:
                       <article id="api-StopAPI-getStopUsingGET-0" data-group="User" data-name="getStopUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>getStopUsingGET</h1>
-                          <p>Get a stop by ID</p>
+                          <p>Get a stop by name</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -4050,7 +5174,7 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/stop/{id}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/stop/{name}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4070,7 +5194,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-StopAPI-getStopUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/stop/{id}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/stop/{name}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-StopAPI-getStopUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4086,9 +5210,9 @@ public class StopAPIApiExample {
     public static void main(String[] args) {
         
         StopAPIApi apiInstance = new StopAPIApi();
-        Integer id = 56; // Integer | id
+        String name = name_example; // String | name
         try {
-            Stop result = apiInstance.getStopUsingGET(id);
+            Stop result = apiInstance.getStopUsingGET(name);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling StopAPIApi#getStopUsingGET");
@@ -4105,9 +5229,9 @@ public class StopAPIApiExample {
 
     public static void main(String[] args) {
         StopAPIApi apiInstance = new StopAPIApi();
-        Integer id = 56; // Integer | id
+        String name = name_example; // String | name
         try {
-            Stop result = apiInstance.getStopUsingGET(id);
+            Stop result = apiInstance.getStopUsingGET(name);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling StopAPIApi#getStopUsingGET");
@@ -4121,12 +5245,12 @@ public class StopAPIApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-StopAPI-getStopUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // id
+                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // name
 
 StopAPIApi *apiInstance = [[StopAPIApi alloc] init];
 
-// Get a stop by ID
-[apiInstance getStopUsingGETWith:id
+// Get a stop by name
+[apiInstance getStopUsingGETWith:name
               completionHandler: ^(Stop output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -4143,7 +5267,7 @@ StopAPIApi *apiInstance = [[StopAPIApi alloc] init];
 
 var api = new ApiDocumentation.StopAPIApi()
 
-var id = 56; // {Integer} id
+var name = name_example; // {String} name
 
 
 var callback = function(error, data, response) {
@@ -4153,7 +5277,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getStopUsingGET(id, callback);
+api.getStopUsingGET(name, callback);
 </code></pre>
                             </div>
 
@@ -4175,12 +5299,12 @@ namespace Example
         {
             
             var apiInstance = new StopAPIApi();
-            var id = 56;  // Integer | id
+            var name = name_example;  // String | name
 
             try
             {
-                // Get a stop by ID
-                Stop result = apiInstance.getStopUsingGET(id);
+                // Get a stop by name
+                Stop result = apiInstance.getStopUsingGET(name);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -4198,10 +5322,10 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\StopAPIApi();
-$id = 56; // Integer | id
+$name = name_example; // String | name
 
 try {
-    $result = $api_instance->getStopUsingGET($id);
+    $result = $api_instance->getStopUsingGET($name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StopAPIApi->getStopUsingGET: ', $e->getMessage(), PHP_EOL;
@@ -4215,10 +5339,10 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::StopAPIApi;
 
 my $api_instance = WWW::SwaggerClient::StopAPIApi->new();
-my $id = 56; # Integer | id
+my $name = name_example; # String | name
 
 eval { 
-    my $result = $api_instance->getStopUsingGET(id => $id);
+    my $result = $api_instance->getStopUsingGET(name => $name);
     print Dumper($result);
 };
 if ($@) {
@@ -4235,11 +5359,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.StopAPIApi()
-id = 56 # Integer | id
+name = name_example # String | name
 
 try: 
-    # Get a stop by ID
-    api_response = api_instance.get_stop_using_get(id)
+    # Get a stop by name
+    api_response = api_instance.get_stop_using_get(name)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling StopAPIApi->getStopUsingGET: %s\n" % e)</code></pre>
@@ -4254,22 +5378,19 @@ except ApiException as e:
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">id*</td>
+                                  <tr><td style="width:150px;">name*</td>
 <td>
 
 
-    <div id="d2e199_getStopUsingGET_id">
+    <div id="d2e199_getStopUsingGET_name">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    Integer
+                    String
                 </span>
-                    <span class="format">
-                        (int32)
-                    </span>
 
                     <div class="inner description">
-                        id
+                        name
                     </div>
             </div>
                 <div class="inner required">
@@ -4392,7 +5513,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserAPI-addEventUsingPOST-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost:8004/user/{user_id}/event?user_id="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/user/{user_id}/event"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserAPI-addEventUsingPOST-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4409,9 +5530,8 @@ public class UserAPIApiExample {
         
         UserAPIApi apiInstance = new UserAPIApi();
         Event event = ; // Event | event
-        Integer userId = 56; // Integer | user_id
         try {
-            Event result = apiInstance.addEventUsingPOST(event, userId);
+            'Boolean' result = apiInstance.addEventUsingPOST(event);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#addEventUsingPOST");
@@ -4429,9 +5549,8 @@ public class UserAPIApiExample {
     public static void main(String[] args) {
         UserAPIApi apiInstance = new UserAPIApi();
         Event event = ; // Event | event
-        Integer userId = 56; // Integer | user_id
         try {
-            Event result = apiInstance.addEventUsingPOST(event, userId);
+            'Boolean' result = apiInstance.addEventUsingPOST(event);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#addEventUsingPOST");
@@ -4446,14 +5565,12 @@ public class UserAPIApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-UserAPI-addEventUsingPOST-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Event *event = ; // event
-Integer *userId = 56; // user_id
 
 UserAPIApi *apiInstance = [[UserAPIApi alloc] init];
 
 // Add a event to a user
 [apiInstance addEventUsingPOSTWith:event
-    userId:userId
-              completionHandler: ^(Event output, NSError* error) {
+              completionHandler: ^('Boolean' output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -4471,8 +5588,6 @@ var api = new ApiDocumentation.UserAPIApi()
 
 var event = ; // {Event} event
 
-var userId = 56; // {Integer} user_id
-
 
 var callback = function(error, data, response) {
   if (error) {
@@ -4481,7 +5596,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.addEventUsingPOST(event, userId, callback);
+api.addEventUsingPOST(event, callback);
 </code></pre>
                             </div>
 
@@ -4504,12 +5619,11 @@ namespace Example
             
             var apiInstance = new UserAPIApi();
             var event = new Event(); // Event | event
-            var userId = 56;  // Integer | user_id
 
             try
             {
                 // Add a event to a user
-                Event result = apiInstance.addEventUsingPOST(event, userId);
+                'Boolean' result = apiInstance.addEventUsingPOST(event);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -4528,10 +5642,9 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UserAPIApi();
 $event = ; // Event | event
-$userId = 56; // Integer | user_id
 
 try {
-    $result = $api_instance->addEventUsingPOST($event, $userId);
+    $result = $api_instance->addEventUsingPOST($event);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserAPIApi->addEventUsingPOST: ', $e->getMessage(), PHP_EOL;
@@ -4546,10 +5659,9 @@ use WWW::SwaggerClient::UserAPIApi;
 
 my $api_instance = WWW::SwaggerClient::UserAPIApi->new();
 my $event = WWW::SwaggerClient::Object::Event->new(); # Event | event
-my $userId = 56; # Integer | user_id
 
 eval { 
-    my $result = $api_instance->addEventUsingPOST(event => $event, userId => $userId);
+    my $result = $api_instance->addEventUsingPOST(event => $event);
     print Dumper($result);
 };
 if ($@) {
@@ -4567,11 +5679,10 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.UserAPIApi()
 event =  # Event | event
-userId = 56 # Integer | user_id
 
 try: 
     # Add a event to a user
-    api_response = api_instance.add_event_using_post(event, userId)
+    api_response = api_instance.add_event_using_post(event)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling UserAPIApi->addEventUsingPOST: %s\n" % e)</code></pre>
@@ -4626,39 +5737,6 @@ $(document).ready(function() {
                             </table>
 
 
-                            <div class="methodsubtabletitle">Query parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">user_id*</td>
-<td>
-
-
-    <div id="d2e199_addEventUsingPOST_userId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
-                    <div class="inner description">
-                        user_id
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
 
                           <h2>Responses</h2>
                             <h3> Status: 200 - OK </h3>
@@ -4678,7 +5756,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "schema" : {
-    "$ref" : "#/definitions/Event"
+    "type" : "boolean"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -4751,7 +5829,7 @@ $(document).ready(function() {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/user/</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/user</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -4771,7 +5849,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserAPI-addUserUsingPOST-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost:8004/user/"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/user"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserAPI-addUserUsingPOST-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4789,7 +5867,7 @@ public class UserAPIApiExample {
         UserAPIApi apiInstance = new UserAPIApi();
         User user = ; // User | user
         try {
-            User result = apiInstance.addUserUsingPOST(user);
+            'Boolean' result = apiInstance.addUserUsingPOST(user);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#addUserUsingPOST");
@@ -4808,7 +5886,7 @@ public class UserAPIApiExample {
         UserAPIApi apiInstance = new UserAPIApi();
         User user = ; // User | user
         try {
-            User result = apiInstance.addUserUsingPOST(user);
+            'Boolean' result = apiInstance.addUserUsingPOST(user);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#addUserUsingPOST");
@@ -4828,7 +5906,7 @@ UserAPIApi *apiInstance = [[UserAPIApi alloc] init];
 
 // Add a user
 [apiInstance addUserUsingPOSTWith:user
-              completionHandler: ^(User output, NSError* error) {
+              completionHandler: ^('Boolean' output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -4881,7 +5959,7 @@ namespace Example
             try
             {
                 // Add a user
-                User result = apiInstance.addUserUsingPOST(user);
+                'Boolean' result = apiInstance.addUserUsingPOST(user);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -5014,7 +6092,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "schema" : {
-    "$ref" : "#/definitions/User"
+    "type" : "boolean"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -5107,7 +6185,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserAPI-findByIdUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/user/{id}"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/user/{id}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserAPI-findByIdUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5406,7 +6484,7 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/user/{id}/events</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/user/{user_id}/events</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -5426,7 +6504,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserAPI-getUserEventsUsingGET-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/user/{id}/events?endtime=&starttime="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/user/{user_id}/events?endtime=&starttime="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5442,11 +6520,11 @@ public class UserAPIApiExample {
     public static void main(String[] args) {
         
         UserAPIApi apiInstance = new UserAPIApi();
-        Integer id = 56; // Integer | id
-        String endtime = endtime_example; // String | endtime
-        String starttime = starttime_example; // String | starttime
+        Integer userId = 56; // Integer | user_id
+        Date endtime = 2013-10-20T19:20:30+01:00; // Date | endtime
+        Date starttime = 2013-10-20T19:20:30+01:00; // Date | starttime
         try {
-            array[Event] result = apiInstance.getUserEventsUsingGET(id, endtime, starttime);
+            array[Event] result = apiInstance.getUserEventsUsingGET(userId, endtime, starttime);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#getUserEventsUsingGET");
@@ -5463,11 +6541,11 @@ public class UserAPIApiExample {
 
     public static void main(String[] args) {
         UserAPIApi apiInstance = new UserAPIApi();
-        Integer id = 56; // Integer | id
-        String endtime = endtime_example; // String | endtime
-        String starttime = starttime_example; // String | starttime
+        Integer userId = 56; // Integer | user_id
+        Date endtime = 2013-10-20T19:20:30+01:00; // Date | endtime
+        Date starttime = 2013-10-20T19:20:30+01:00; // Date | starttime
         try {
-            array[Event] result = apiInstance.getUserEventsUsingGET(id, endtime, starttime);
+            array[Event] result = apiInstance.getUserEventsUsingGET(userId, endtime, starttime);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserAPIApi#getUserEventsUsingGET");
@@ -5481,14 +6559,14 @@ public class UserAPIApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // id
-String *endtime = endtime_example; // endtime (optional)
-String *starttime = starttime_example; // starttime (optional)
+                              <pre class="prettyprint"><code class="language-cpp">Integer *userId = 56; // user_id
+Date *endtime = 2013-10-20T19:20:30+01:00; // endtime (optional)
+Date *starttime = 2013-10-20T19:20:30+01:00; // starttime (optional)
 
 UserAPIApi *apiInstance = [[UserAPIApi alloc] init];
 
 // Search User's events, need be restricted by :starttime and :endtime
-[apiInstance getUserEventsUsingGETWith:id
+[apiInstance getUserEventsUsingGETWith:userId
     endtime:endtime
     starttime:starttime
               completionHandler: ^(array[Event] output, NSError* error) {
@@ -5507,11 +6585,11 @@ UserAPIApi *apiInstance = [[UserAPIApi alloc] init];
 
 var api = new ApiDocumentation.UserAPIApi()
 
-var id = 56; // {Integer} id
+var userId = 56; // {Integer} user_id
 
 var opts = { 
-  'endtime': endtime_example, // {String} endtime
-  'starttime': starttime_example // {String} starttime
+  'endtime': 2013-10-20T19:20:30+01:00, // {Date} endtime
+  'starttime': 2013-10-20T19:20:30+01:00 // {Date} starttime
 };
 
 var callback = function(error, data, response) {
@@ -5521,7 +6599,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getUserEventsUsingGET(id, opts, callback);
+api.getUserEventsUsingGET(userId, opts, callback);
 </code></pre>
                             </div>
 
@@ -5543,14 +6621,14 @@ namespace Example
         {
             
             var apiInstance = new UserAPIApi();
-            var id = 56;  // Integer | id
-            var endtime = endtime_example;  // String | endtime (optional) 
-            var starttime = starttime_example;  // String | starttime (optional) 
+            var userId = 56;  // Integer | user_id
+            var endtime = 2013-10-20T19:20:30+01:00;  // Date | endtime (optional) 
+            var starttime = 2013-10-20T19:20:30+01:00;  // Date | starttime (optional) 
 
             try
             {
                 // Search User's events, need be restricted by :starttime and :endtime
-                array[Event] result = apiInstance.getUserEventsUsingGET(id, endtime, starttime);
+                array[Event] result = apiInstance.getUserEventsUsingGET(userId, endtime, starttime);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -5568,12 +6646,12 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UserAPIApi();
-$id = 56; // Integer | id
-$endtime = endtime_example; // String | endtime
-$starttime = starttime_example; // String | starttime
+$userId = 56; // Integer | user_id
+$endtime = 2013-10-20T19:20:30+01:00; // Date | endtime
+$starttime = 2013-10-20T19:20:30+01:00; // Date | starttime
 
 try {
-    $result = $api_instance->getUserEventsUsingGET($id, $endtime, $starttime);
+    $result = $api_instance->getUserEventsUsingGET($userId, $endtime, $starttime);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserAPIApi->getUserEventsUsingGET: ', $e->getMessage(), PHP_EOL;
@@ -5587,12 +6665,12 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UserAPIApi;
 
 my $api_instance = WWW::SwaggerClient::UserAPIApi->new();
-my $id = 56; # Integer | id
-my $endtime = endtime_example; # String | endtime
-my $starttime = starttime_example; # String | starttime
+my $userId = 56; # Integer | user_id
+my $endtime = 2013-10-20T19:20:30+01:00; # Date | endtime
+my $starttime = 2013-10-20T19:20:30+01:00; # Date | starttime
 
 eval { 
-    my $result = $api_instance->getUserEventsUsingGET(id => $id, endtime => $endtime, starttime => $starttime);
+    my $result = $api_instance->getUserEventsUsingGET(userId => $userId, endtime => $endtime, starttime => $starttime);
     print Dumper($result);
 };
 if ($@) {
@@ -5609,13 +6687,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.UserAPIApi()
-id = 56 # Integer | id
-endtime = endtime_example # String | endtime (optional)
-starttime = starttime_example # String | starttime (optional)
+userId = 56 # Integer | user_id
+endtime = 2013-10-20T19:20:30+01:00 # Date | endtime (optional)
+starttime = 2013-10-20T19:20:30+01:00 # Date | starttime (optional)
 
 try: 
     # Search User's events, need be restricted by :starttime and :endtime
-    api_response = api_instance.get_user_events_using_get(id, endtime=endtime, starttime=starttime)
+    api_response = api_instance.get_user_events_using_get(userId, endtime=endtime, starttime=starttime)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling UserAPIApi->getUserEventsUsingGET: %s\n" % e)</code></pre>
@@ -5630,11 +6708,11 @@ except ApiException as e:
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">id*</td>
+                                  <tr><td style="width:150px;">user_id*</td>
 <td>
 
 
-    <div id="d2e199_getUserEventsUsingGET_id">
+    <div id="d2e199_getUserEventsUsingGET_userId">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -5645,7 +6723,7 @@ except ApiException as e:
                     </span>
 
                     <div class="inner description">
-                        id
+                        user_id
                     </div>
             </div>
                 <div class="inner required">
@@ -5675,8 +6753,11 @@ except ApiException as e:
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description">
                         endtime
@@ -5695,8 +6776,11 @@ except ApiException as e:
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
-                    String
+                    Date
                 </span>
+                    <span class="format">
+                        (date-time)
+                    </span>
 
                     <div class="inner description">
                         starttime
@@ -5783,361 +6867,6 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                    <div id="api-UserAPI-getUserEventsUsingGET1">
-                      <article id="api-UserAPI-getUserEventsUsingGET1-0" data-group="User" data-name="getUserEventsUsingGET1" data-version="0">
-                        <div class="pull-left">
-                          <h1>getUserEventsUsingGET1</h1>
-                          <p>Search a User&#39;s event by :user_id and :event_id</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/user/{user_id}/event/{event_id}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-UserAPI-getUserEventsUsingGET1-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-java">Java</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-UserAPI-getUserEventsUsingGET1-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-UserAPI-getUserEventsUsingGET1-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost:8004/user/{user_id}/event/{event_id}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.UserAPIApi;
-
-import java.io.File;
-import java.util.*;
-
-public class UserAPIApiExample {
-
-    public static void main(String[] args) {
-        
-        UserAPIApi apiInstance = new UserAPIApi();
-        Integer eventId = 56; // Integer | event_id
-        Integer userId = 56; // Integer | user_id
-        try {
-            Event result = apiInstance.getUserEventsUsingGET1(eventId, userId);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling UserAPIApi#getUserEventsUsingGET1");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.UserAPIApi;
-
-public class UserAPIApiExample {
-
-    public static void main(String[] args) {
-        UserAPIApi apiInstance = new UserAPIApi();
-        Integer eventId = 56; // Integer | event_id
-        Integer userId = 56; // Integer | user_id
-        try {
-            Event result = apiInstance.getUserEventsUsingGET1(eventId, userId);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling UserAPIApi#getUserEventsUsingGET1");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Integer *eventId = 56; // event_id
-Integer *userId = 56; // user_id
-
-UserAPIApi *apiInstance = [[UserAPIApi alloc] init];
-
-// Search a User's event by :user_id and :event_id
-[apiInstance getUserEventsUsingGET1With:eventId
-    userId:userId
-              completionHandler: ^(Event output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApiDocumentation = require('api_documentation');
-
-var api = new ApiDocumentation.UserAPIApi()
-
-var eventId = 56; // {Integer} event_id
-
-var userId = 56; // {Integer} user_id
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getUserEventsUsingGET1(eventId, userId, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getUserEventsUsingGET1Example
-    {
-        public void main()
-        {
-            
-            var apiInstance = new UserAPIApi();
-            var eventId = 56;  // Integer | event_id
-            var userId = 56;  // Integer | user_id
-
-            try
-            {
-                // Search a User's event by :user_id and :event_id
-                Event result = apiInstance.getUserEventsUsingGET1(eventId, userId);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling UserAPIApi.getUserEventsUsingGET1: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\UserAPIApi();
-$eventId = 56; // Integer | event_id
-$userId = 56; // Integer | user_id
-
-try {
-    $result = $api_instance->getUserEventsUsingGET1($eventId, $userId);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling UserAPIApi->getUserEventsUsingGET1: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::UserAPIApi;
-
-my $api_instance = WWW::SwaggerClient::UserAPIApi->new();
-my $eventId = 56; # Integer | event_id
-my $userId = 56; # Integer | user_id
-
-eval { 
-    my $result = $api_instance->getUserEventsUsingGET1(eventId => $eventId, userId => $userId);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling UserAPIApi->getUserEventsUsingGET1: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-UserAPI-getUserEventsUsingGET1-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.UserAPIApi()
-eventId = 56 # Integer | event_id
-userId = 56 # Integer | user_id
-
-try: 
-    # Search a User's event by :user_id and :event_id
-    api_response = api_instance.get_user_events_using_get1(eventId, userId)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling UserAPIApi->getUserEventsUsingGET1: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">event_id*</td>
-<td>
-
-
-    <div id="d2e199_getUserEventsUsingGET1_eventId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
-                    <div class="inner description">
-                        event_id
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                  <tr><td style="width:150px;">user_id*</td>
-<td>
-
-
-    <div id="d2e199_getUserEventsUsingGET1_userId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Integer
-                </span>
-                    <span class="format">
-                        (int32)
-                    </span>
-
-                    <div class="inner description">
-                        user_id
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getUserEventsUsingGET1-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getUserEventsUsingGET1-200-schema">
-                                  <div id='responses-getUserEventsUsingGET1-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/Event"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = defs;
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getUserEventsUsingGET1-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getUserEventsUsingGET1-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getUserEventsUsingGET1-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 401 - Unauthorized </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 403 - Forbidden </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Not Found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
                     <div id="api-UserAPI-updateUsingPUT">
                       <article id="api-UserAPI-updateUsingPUT-0" data-group="User" data-name="updateUsingPUT" data-version="0">
                         <div class="pull-left">
@@ -6150,7 +6879,7 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/user/</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/user</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -6170,7 +6899,7 @@ except ApiException as e:
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserAPI-updateUsingPUT-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT "https://localhost:8004/user/"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT "https://localhost/user"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserAPI-updateUsingPUT-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

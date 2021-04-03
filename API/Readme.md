@@ -1,10 +1,6 @@
 # API Document (Version 0.2)
 
-> Any change to API should be record here, **"Readme.md"**;
->
-> Change a lot, then we can archive this file as **"API v1.0.md"** etc;
->
-> And then continue editing on this readme file.
+***NOTE: Currently real-time API document is on [http://ec2-18-232-62-169.compute-1.amazonaws.com/api/v1/swagger-ui.html#/](http://ec2-18-232-62-169.compute-1.amazonaws.com/api/v1/swagger-ui.html#/), GO CHECK IT.***
 
 ## 0. Guideline
 
