@@ -1,0 +1,9 @@
+#sudo ps -ef | grep campus |grep -v grep
+
+if [ ! -z "$(ps -ef | grep campus | grep -v grep)" ];
+then
+	echo "Running"
+        echo "$(sudo ps -ef | grep campus | grep -v grep | awk '{print $2}')"
+else
+        echo "No existing process"
+fi

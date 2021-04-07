@@ -1,0 +1,12 @@
+cd ./NUS-tour-backend
+sudo mvn clean
+sudo mvn compile
+if [ ! -z "$(ps -ef | grep campus | grep -v grep)" ];
+then
+	sudo ps -ef | grep campus | grep -v grep | awk '{print $2}' | xargs sudo kill -9
+	echo "Stop existing process"
+else
+	echo "No existing process"
+fi
+echo "Run new server"
+sudo nohup mvn exec:java -Dexec.mainClass="edu.nus.campus.CampusApplication" > /home/ubuntu/logs/nus-tour.log 2>&1 &

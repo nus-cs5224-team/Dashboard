@@ -1,0 +1,7 @@
+rm -r NUS-tour-backend
+git clone https://github.com/nus-cs5224-team/NUS-tour-backend
+
+sudo sed -i -e '3d' -e '4s/^#//' NUS-tour-backend/src/main/resources/application.properties
+
+rm -r NUS-tour-backend-adminUI
+git clone https://github.com/nus-cs5224-team/NUS-tour-backend-adminUI
